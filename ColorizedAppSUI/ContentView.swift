@@ -24,9 +24,9 @@ struct ContentView: View {
                     blue: $blueSliderValue
                 )
                 
-                ColorSliderView(value: $redSliderValue, color: .red)
-                ColorSliderView(value: $greenSliderValue, color: .green)
-                ColorSliderView(value: $blueSliderValue, color: .blue)
+                СontrolPanelView(value: $redSliderValue, color: .red)
+                СontrolPanelView(value: $greenSliderValue, color: .green)
+                СontrolPanelView(value: $blueSliderValue, color: .blue)
                 
                 Spacer()
             }
@@ -56,22 +56,23 @@ struct ColorView: View {
     }
 }
 
-struct ColorSliderView: View {
+struct СontrolPanelView: View {
     @Binding var value: Double
     let color: Color
     
     var body: some View {
         HStack {
-            Text("0")
+            Text("\(lround(value))")
                 .foregroundColor(color)
+                .frame(width: 40)
                 .fontWeight(.bold)
             
             Slider(value: $value, in: 0...255, step: 1)
                 .accentColor(color)
-                .frame(width: 260)
+                .frame(width: 238)
             
             TextField("", value: $value, formatter: NumberFormatter(), onCommit: { })
-                .keyboardType(.numberPad) 
+                .keyboardType(.numberPad)
                 .textFieldStyle(RoundedBorderTextFieldStyle())
                 .frame(width: 50)
                 .onChange(of: value) { newValue in
@@ -86,3 +87,4 @@ struct ColorSliderView: View {
         }
     }
 }
+
