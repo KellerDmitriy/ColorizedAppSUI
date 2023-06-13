@@ -71,8 +71,18 @@ struct ColorSliderView: View {
                 .frame(width: 260)
             
             TextField("", value: $value, formatter: NumberFormatter(), onCommit: { })
+                .keyboardType(.numberPad) 
                 .textFieldStyle(RoundedBorderTextFieldStyle())
                 .frame(width: 50)
+                .onChange(of: value) { newValue in
+                    if newValue < 0 {
+                        value = 0
+                    } else if newValue > 255 {
+                        value = 255
+                    } else {
+                        value = newValue
+                    }
+                }
         }
     }
 }
